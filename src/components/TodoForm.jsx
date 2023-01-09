@@ -5,9 +5,9 @@ import { addTodo } from "../features/todosSlice";
 
 const TodoForm = () => {
   const dispatch = useDispatch();
-  const todoAdd = useSelector((state) => {
+  const { todoKey } = useSelector((state) => {
     return {
-      todo: state.form.todo,
+      todoKey: state.form.todo,
     };
   });
 
@@ -17,12 +17,18 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo(todoAdd));
+    dispatch(addTodo({ todoKey }));
   };
 
   return (
     <form className="todo-form" onSubmit={handleSubmit}>
-      <input type="text" className="todo-input" onChange={handleChange} />
+      <input
+        type="text"
+        className="todo-input"
+        onChange={handleChange}
+        placeholder="Add a todo"
+        value={todoKey}
+      />
       <button type="submit" className="todo-button">
         {" "}
         Add Todo

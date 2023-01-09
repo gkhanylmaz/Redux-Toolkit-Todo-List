@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addTodo } from "./todosSlice";
 
 const initialState = {
   todo: "",
@@ -11,6 +12,11 @@ export const formSlice = createSlice({
     todo: (state, action) => {
       state.todo = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(addTodo, (state, action) => {
+      state.todo = "";
+    });
   },
 });
 

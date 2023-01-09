@@ -2,13 +2,14 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
   todosData: [],
+  completed: false,
 };
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todosData.push({ todo: action.payload.todo, id: nanoid() });
+      state.todosData.push({ todoKey: action.payload.todoKey, id: nanoid() });
     },
     deleteTodo: (state, action) => {
       const deleteTodo = state.todosData.filter(
@@ -19,10 +20,14 @@ export const todosSlice = createSlice({
     editTodo: (state, action) => {
       state.value += action.payload;
     },
+    completedTodo: (state, action) => {
+      state.action = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addTodo, deleteTodo, editTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, editTodo, completedTodo } =
+  todosSlice.actions;
 
 export default todosSlice.reducer;
