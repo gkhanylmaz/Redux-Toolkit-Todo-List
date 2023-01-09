@@ -1,31 +1,31 @@
 import React from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTodo } from "../features/todosSlice";
 
 const Todo = () => {
+  const todosApp = useSelector((state) => state.todos.todosData);
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
   return (
     <>
-      <div className="todo-row">
-        <div> asdasdsa</div>
-        <div className="icons">
-          <RiCloseCircleLine className="delete-icon" />
-          <TiEdit className="edit-icon" />
+      {todosApp.map((todo, index) => (
+        <div className="todo-row" key={index}>
+          <div> {todo.todo}</div>
+          <div className="icons">
+            <RiCloseCircleLine
+              className="delete-icon"
+              onClick={() => handleDelete(todo.id)}
+            />
+            <TiEdit className="edit-icon" />
+          </div>
         </div>
-      </div>
-      <div className="todo-row">
-        <div> a12312312312sa</div>
-        <div className="icons">
-          <RiCloseCircleLine className="delete-icon" />
-          <TiEdit className="edit-icon" />
-        </div>
-      </div>
-      <div className="todo-row">
-        <div> asdas adsfasfdasfadsa</div>
-        <div className="icons">
-          <RiCloseCircleLine className="delete-icon" />
-          <TiEdit className="edit-icon" />
-        </div>
-      </div>
+      ))}
     </>
   );
 };
