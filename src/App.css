@@ -100,7 +100,7 @@ h1 {
     rgba(255, 118, 20, 1) 0%,
     rgba(255, 84, 17, 1) 100%
   );
-
+  cursor: pointer;
   padding: 16px;
   border-radius: 5px;
   width: 90%;

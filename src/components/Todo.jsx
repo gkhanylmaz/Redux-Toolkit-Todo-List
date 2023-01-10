@@ -6,7 +6,6 @@ import { deleteTodo, completedTodo } from "../features/todosSlice";
 
 const Todo = () => {
   const todosApp = useSelector((state) => state.todos.todosData);
-  const completedTodo = useSelector((state) => state.todos.completed);
 
   const dispatch = useDispatch();
 
@@ -14,7 +13,7 @@ const Todo = () => {
     dispatch(deleteTodo(id));
   };
 
-  const handleComplete = (id) => {
+  const completedClick = (id) => {
     dispatch(completedTodo(id));
   };
 
@@ -22,9 +21,9 @@ const Todo = () => {
     <>
       {todosApp.map((todo, index) => (
         <div
-          className="todo-row"
+          onClick={() => completedClick(todo.id)}
+          className={todo.isCompleted ? "todo-row complete" : "todo-row"}
           key={index}
-          onClick={() => handleComplete(todo.id)}
         >
           <div> {todo.todoKey}</div>
           <div className="icons">
