@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,8 +6,11 @@ import { deleteTodo, completedTodo } from "../features/todosSlice";
 
 const Todo = () => {
   const todosApp = useSelector((state) => state.todos.todosData);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todosApp));
+  }, [todosApp]);
 
   const handleDelete = (id) => {
     dispatch(deleteTodo(id));
